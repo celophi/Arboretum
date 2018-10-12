@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2035
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arboretum.Lib", "Arboretum.Lib\Arboretum.Lib.csproj", "{BFEACBA8-BD86-4FF6-8A24-F4FFF6848109}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arboretum.Window", "Arboretum.Window\Arboretum.Window.csproj", "{869FF7C3-D2F4-4698-8ED6-A86C239B6E80}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BFEACBA8-BD86-4FF6-8A24-F4FFF6848109}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFEACBA8-BD86-4FF6-8A24-F4FFF6848109}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFEACBA8-BD86-4FF6-8A24-F4FFF6848109}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFEACBA8-BD86-4FF6-8A24-F4FFF6848109}.Release|Any CPU.Build.0 = Release|Any CPU
+		{869FF7C3-D2F4-4698-8ED6-A86C239B6E80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{869FF7C3-D2F4-4698-8ED6-A86C239B6E80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{869FF7C3-D2F4-4698-8ED6-A86C239B6E80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{869FF7C3-D2F4-4698-8ED6-A86C239B6E80}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FD6B15F7-051A-48BE-A038-923B4B899F5A}
+	EndGlobalSection
+EndGlobal
