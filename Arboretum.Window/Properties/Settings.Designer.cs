@@ -22,5 +22,21 @@ namespace Arboretum.Window.Properties {
                 return defaultInstance;
             }
         }
+        
+        /// <summary>
+        /// Default URL to the client file tree.
+        /// </summary>
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.SettingsDescriptionAttribute("Default URL to the client file tree.")]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://drygkhncipyq8.cloudfront.net")]
+        public string DefaultUrl {
+            get {
+                return ((string)(this["DefaultUrl"]));
+            }
+            set {
+                this["DefaultUrl"] = value;
+            }
+        }
     }
 }

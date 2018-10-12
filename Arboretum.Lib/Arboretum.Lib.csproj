@@ -41,6 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Decryptor.cs" />
+    <Compile Include="NetClient.cs" />
+    <Compile Include="PakZip.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Libraries\Blowfish.cs" />
   </ItemGroup>

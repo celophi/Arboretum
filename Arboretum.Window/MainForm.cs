@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace Arboretum
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
         }
@@ -36,6 +36,11 @@ namespace Arboretum
         private void aboutToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             new AboutForm().ShowDialog();
+        }
+
+        private void changeURLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
