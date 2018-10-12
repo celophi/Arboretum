@@ -1,56 +1,66 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.IO.Compression;
-using System.Text;
+using System.Linq;
 
 namespace Arboretum.Lib
 {
     public class PakZip
     {
-        public readonly string Archive;
+        /// <summary>
+        /// Path to the archive.
+        /// </summary>
+        public readonly string ArchivePath;
+
+        /// <summary>
+        /// List of files contained within the PAK archive.
+        /// </summary>
+        public List<PakFile> PakFiles;
 
         public PakZip(string path)
         {
             if (!File.Exists(path))
             {
-                throw new FileNotFoundException($"Error. The file {path} was not found.");
+                throw new FileNotFoundException($"Error. The file was not found.", path);
             }
 
-            this.Archive = path;
+            this.ArchivePath = path;
+            this.PakFiles = new List<PakFile>();
+
+            using (var reader = new BinaryReader(File.Open(this.ArchivePath, FileMode.Open)))
+            {
+                var total = reader.BaseStream.Length;
+                while (reader.BaseStream.Position < total)
+                {
+                    var pak = new PakFile(reader);
+                    this.PakFiles.Add(pak);
+                }
+            }
         }
 
         /// <summary>
-        /// Extracts a PakZip file to a directory.
+        /// Extracts a single file inside of a PAK archive to a destination directory.
         /// </summary>
+        /// <param name="filename"></param>
         /// <param name="outputDirectory"></param>
-        public void Extract(string outputDirectory)
+        public void Extract(string filename, string outputDirectory)
         {
-            using (var reader = new BinaryReader(File.Open(this.Archive, FileMode.Open)))
+            var pak = this.PakFiles.FirstOrDefault(x => x.FileName == filename);
+            if (pak == null)
             {
-                var total = reader.BaseStream.Length;
+                throw new FileNotFoundException($"Error. Could not find file inside the archive.", filename);
+            }
 
-                while (reader.BaseStream.Position < total)
+            var buffer = new byte[pak.UncompressedSize];
+            var outputFile = Path.GetFullPath(Path.Combine(outputDirectory, filename));
+            Directory.CreateDirectory(Path.GetDirectoryName(outputFile));
+
+            using (var ms = new MemoryStream(pak.Zipped))
+            using (var writer = File.Create(outputFile))
+            {
+                using (var ds = new DeflateStream(ms, CompressionMode.Decompress))
                 {
-                    var filenameLength = reader.ReadInt16();
-                    var crc = reader.ReadInt32();
-                    var compressedSize = reader.ReadUInt32();
-                    var uncompressedSize = reader.ReadUInt32();
-                    var filenameBytes = reader.ReadBytes(filenameLength);
-                    var zipped = reader.ReadBytes((int)compressedSize);
-
-                    var filename = Encoding.UTF8.GetString(filenameBytes);
-                    var buffer = new byte[uncompressedSize];
-
-                    var outputFile = Path.GetFullPath(Path.Combine(outputDirectory, filename));
-                    Directory.CreateDirectory(Path.GetDirectoryName(outputFile));
-
-                    using (var ms = new MemoryStream(zipped))
-                    using (var writer = File.Create(outputFile))
-                    {
-                        using (var ds = new DeflateStream(ms, CompressionMode.Decompress))
-                        {
-                            ds.CopyTo(writer);
-                        }
-                    }
+                    ds.CopyTo(writer);
                 }
             }
         }
