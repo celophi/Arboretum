@@ -88,5 +88,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Arboretum.Lib\Arboretum.Lib.csproj">
+      <Project>{BFEACBA8-BD86-4FF6-8A24-F4FFF6848109}</Project>
+      <Name>Arboretum.Lib</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
