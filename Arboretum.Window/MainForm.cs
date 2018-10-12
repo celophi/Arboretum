@@ -42,5 +42,21 @@ namespace Arboretum
         {
 
         }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var dialog = new OpenFileDialog
+            {
+                AddExtension = true,
+                DefaultExt = ".pak",
+                CheckFileExists = true,
+                CheckPathExists = true,
+                Multiselect = false,
+                Title = "Archive Selector",
+                Filter = "PakZip (*.pak) | *.pak",
+            };
+
+            dialog.ShowDialog();
+        }
     }
 }

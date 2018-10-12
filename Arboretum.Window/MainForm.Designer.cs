@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.treeView1 = new System.Windows.Forms.TreeView();
-            this.listBox1 = new System.Windows.Forms.ListBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -39,32 +37,27 @@
             this.changeURLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.ArchiveContentsTab = new System.Windows.Forms.TabPage();
+            this.RemoteTreeTab = new System.Windows.Forms.TabPage();
+            this.treeView1 = new System.Windows.Forms.TreeView();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.splitter1 = new System.Windows.Forms.Splitter();
+            this.ArchiveContentsTreeView = new System.Windows.Forms.TreeView();
             this.statusStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.ArchiveContentsTab.SuspendLayout();
+            this.RemoteTreeTab.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // treeView1
-            // 
-            this.treeView1.Location = new System.Drawing.Point(12, 31);
-            this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(348, 407);
-            this.treeView1.TabIndex = 0;
-            // 
-            // listBox1
-            // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(381, 31);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(407, 407);
-            this.listBox1.TabIndex = 1;
             // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 428);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 465);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(800, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(870, 22);
             this.statusStrip1.TabIndex = 3;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -83,7 +76,7 @@
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(870, 24);
             this.menuStrip1.TabIndex = 5;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -98,8 +91,9 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openToolStripMenuItem.Text = "Open";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem
             // 
@@ -113,7 +107,7 @@
             // changeURLToolStripMenuItem
             // 
             this.changeURLToolStripMenuItem.Name = "changeURLToolStripMenuItem";
-            this.changeURLToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.changeURLToolStripMenuItem.Size = new System.Drawing.Size(139, 22);
             this.changeURLToolStripMenuItem.Text = "Change URL";
             this.changeURLToolStripMenuItem.Click += new System.EventHandler(this.changeURLToolStripMenuItem_Click);
             // 
@@ -132,30 +126,100 @@
             this.aboutToolStripMenuItem1.Text = "About";
             this.aboutToolStripMenuItem1.Click += new System.EventHandler(this.aboutToolStripMenuItem1_Click);
             // 
+            // tabControl1
+            // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl1.Controls.Add(this.RemoteTreeTab);
+            this.tabControl1.Controls.Add(this.ArchiveContentsTab);
+            this.tabControl1.Location = new System.Drawing.Point(12, 31);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(846, 431);
+            this.tabControl1.TabIndex = 6;
+            // 
+            // ArchiveContentsTab
+            // 
+            this.ArchiveContentsTab.Controls.Add(this.ArchiveContentsTreeView);
+            this.ArchiveContentsTab.Location = new System.Drawing.Point(4, 22);
+            this.ArchiveContentsTab.Name = "ArchiveContentsTab";
+            this.ArchiveContentsTab.Padding = new System.Windows.Forms.Padding(3);
+            this.ArchiveContentsTab.Size = new System.Drawing.Size(838, 405);
+            this.ArchiveContentsTab.TabIndex = 1;
+            this.ArchiveContentsTab.Text = "Archive Contents";
+            this.ArchiveContentsTab.UseVisualStyleBackColor = true;
+            // 
+            // RemoteTreeTab
+            // 
+            this.RemoteTreeTab.BackColor = System.Drawing.Color.White;
+            this.RemoteTreeTab.Controls.Add(this.listView1);
+            this.RemoteTreeTab.Controls.Add(this.splitter1);
+            this.RemoteTreeTab.Controls.Add(this.treeView1);
+            this.RemoteTreeTab.Location = new System.Drawing.Point(4, 22);
+            this.RemoteTreeTab.Name = "RemoteTreeTab";
+            this.RemoteTreeTab.Padding = new System.Windows.Forms.Padding(3);
+            this.RemoteTreeTab.Size = new System.Drawing.Size(838, 405);
+            this.RemoteTreeTab.TabIndex = 0;
+            this.RemoteTreeTab.Text = "Remote Tree";
+            // 
+            // treeView1
+            // 
+            this.treeView1.BackColor = System.Drawing.SystemColors.Window;
+            this.treeView1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.treeView1.Location = new System.Drawing.Point(3, 3);
+            this.treeView1.Name = "treeView1";
+            this.treeView1.Size = new System.Drawing.Size(293, 399);
+            this.treeView1.TabIndex = 0;
+            // 
+            // listView1
+            // 
+            this.listView1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView1.Location = new System.Drawing.Point(299, 3);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(536, 399);
+            this.listView1.TabIndex = 2;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            // 
+            // splitter1
+            // 
+            this.splitter1.Location = new System.Drawing.Point(296, 3);
+            this.splitter1.Name = "splitter1";
+            this.splitter1.Size = new System.Drawing.Size(3, 399);
+            this.splitter1.TabIndex = 1;
+            this.splitter1.TabStop = false;
+            // 
+            // ArchiveContentsTreeView
+            // 
+            this.ArchiveContentsTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ArchiveContentsTreeView.Location = new System.Drawing.Point(3, 3);
+            this.ArchiveContentsTreeView.Name = "ArchiveContentsTreeView";
+            this.ArchiveContentsTreeView.Size = new System.Drawing.Size(832, 399);
+            this.ArchiveContentsTreeView.TabIndex = 0;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(870, 487);
+            this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.listBox1);
-            this.Controls.Add(this.treeView1);
             this.Name = "MainForm";
             this.Text = "Arboretum";
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.tabControl1.ResumeLayout(false);
+            this.ArchiveContentsTab.ResumeLayout(false);
+            this.RemoteTreeTab.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TreeView treeView1;
-        private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.MenuStrip menuStrip1;
@@ -165,5 +229,12 @@
         private System.Windows.Forms.ToolStripMenuItem changeURLToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem1;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage ArchiveContentsTab;
+        private System.Windows.Forms.TabPage RemoteTreeTab;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.TreeView treeView1;
+        private System.Windows.Forms.Splitter splitter1;
+        private System.Windows.Forms.TreeView ArchiveContentsTreeView;
     }
 }
