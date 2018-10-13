@@ -24,24 +24,21 @@ namespace Arboretum.Lib
         }
 
         /// <summary>
-        /// Decrypts a file using the custom schedule and writes all bytes.
+        /// Decrypts an encrypted TOS file and returns a byte array for the result.
         /// </summary>
-        /// <param name="sourceFile"></param>
-        /// <param name="outputFile"></param>
-        public void Decrypt(string sourceFile, string outputFile)
+        /// <param name="data"></param>
+        public byte[] Decrypt(byte[] data)
         {
             // TODO: Use BSR and remove magic numbers.
+            
+            var unencryptedSize = BitConverter.ToInt32(data, 0);
+            var encryptedSize = BitConverter.ToInt32(data, 4);
 
-            var raw = File.ReadAllBytes(sourceFile);
-
-            var unencryptedSize = BitConverter.ToInt32(raw, 0);
-            var encryptedSize = BitConverter.ToInt32(raw, 4);
-
-            _cryptor.Decipher(raw, 8, encryptedSize);
+            _cryptor.Decipher(data, 8, encryptedSize);
 
             var buffer = new byte[unencryptedSize];
-            Buffer.BlockCopy(raw, 8, buffer, 0, buffer.Length);
-            File.WriteAllBytes(outputFile, buffer);
+            Buffer.BlockCopy(data, 8, buffer, 0, buffer.Length);
+            return buffer;
         }
     }
 }

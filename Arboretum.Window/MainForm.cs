@@ -1,5 +1,6 @@
 ﻿using Arboretum.Lib;
 using Arboretum.Window;
+using Arboretum.Window.Properties;
 using System;
 using System.Data;
 using System.Drawing;
@@ -17,6 +18,9 @@ namespace Arboretum
         {
             InitializeComponent();
             this.ArchiveContentsTreeView.MouseUp += this.On_TreeView_MouseUp;
+
+            var remoteTree = new RemoteTree();
+            remoteTree.Thing(this.RemoteFileTree);
         }
 
         private void toolStripStatusLabel1_Click(object sender, EventArgs e)
